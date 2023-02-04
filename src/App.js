@@ -23,14 +23,12 @@ const questions = [
 	},
 ];
 
-function Result({ correct }) {
+function Result({ correct, again }) {
 	return (
 		<div className="result">
 			<img src="https://cdn-icons-png.flaticon.com/512/2278/2278992.png" />
 			<h2>Вы отгадали {correct} ответ(а) из {questions.length}</h2>
-			<a href='/'>
-				<button>Попробовать снова</button>
-			</a>
+			<button onClick={again}>Попробовать снова</button>
 		</div>
 	);
 }
@@ -68,10 +66,15 @@ function App() {
 		}
 	};
 
+	const again = () => {
+		setStep(0);
+		setCorrect(0);
+	};
+
 	return (
 		<div className="App">
 			{
-				step !== questions.length ? <Game step={step} question={question} onClickVariant={onClickVariant} /> : <Result correct={correct} />
+				step !== questions.length ? <Game step={step} question={question} onClickVariant={onClickVariant} /> : <Result correct={correct} again={again} />
 			}
 		</div>
 	);
